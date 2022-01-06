@@ -14,7 +14,11 @@ and Hill [[5]](https://doi.org/10.2307/2347187).
 The implementation was subsequently ported to C by John Burkardt.
 
 This port to modern C++ takes the same set of parameters and displays
-**the same numerical behaviour as the original routine**.
+**the same numerical behaviour as the original routine**,
+except ⚠ the terminating limit is now in terms of simplex size
+instead of variance in function values. To use the code with the
+variance-based limit, check out the master branch instead.
+
 Changes were restricted to secondary issues:
 * output variables moved to returned struct type
 * function is now passed as std::function which allows using objects as well as traditional functions
@@ -48,7 +52,7 @@ std::array<double,2> step = { 0.1, 0.1 };
 nelder_mead_result<double,2> result = nelder_mead<double,2>(
     function_to_minimize,
     start,
-    1.0e-25, // the terminating limit for the variance of function values
+    1.0e-12, // the terminating limit for the simplex size
     step
 );
 std::cout << "Found minimum: " << std::fixed << result.xmin[0] << ' ' << result.xmin[1] << std::endl;

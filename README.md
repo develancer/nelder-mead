@@ -25,6 +25,11 @@ Changes were restricted to secondary issues:
 All these changes are contained in
 [this changeset](https://github.com/develancer/nelder-mead/commit/b159c43f50f3a7dcaeb1d2c119b944d216dcf9ca).
 
+🆕 Feel free to take a look at the branch
+[simplex-size](https://github.com/develancer/nelder-mead/tree/simplex-size)
+using the simplex size instead of the variance of function values
+as a terminating limit.
+
 ## Requirements
 
 Any C++ compiler with support for the C++11 standard will do.

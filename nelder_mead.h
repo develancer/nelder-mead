@@ -55,6 +55,7 @@
  *    https://github.com/develancer/nelder-mead/
  */
 #ifndef PTR_NELDER_MEAD_H
+#define PTR_NELDER_MEAD_H
 
 #include <algorithm>
 #include <array>

@@ -283,19 +283,17 @@ nelder_mead_result<real,n> nelder_mead(
             if (result.icount <= kcount) {
                 jcount = konvge;
 
-                z = 0.0;
+                // Calculate variance using Welford's algorithm.
+                real mean = 0.0;
+                real m2 = 0.0;
                 for (int i = 0; i < n + 1; i++) {
-                    z += y[i];
-                }
-                x = z / (n + 1);
-
-                z = 0.0;
-                for (int i = 0; i < n + 1; i++) {
-                    real yx = y[i] - x;
-                    z += yx * yx;
+                    real delta = y[i] - mean;
+                    mean += delta / (i + 1);
+                    real delta2 = y[i] - mean;
+                    m2 += delta * delta2;
                 }
 
-                if (z <= rq) {
+                if (m2 <= rq) {
                     break;
                 }
             }

@@ -13,9 +13,10 @@ Benyon [[4]](https://doi.org/10.2307/2346539)
 and Hill [[5]](https://doi.org/10.2307/2347187).
 The implementation was subsequently ported to C by John Burkardt.
 
-This port to modern C++ takes the same set of parameters and displays
-**the same numerical behaviour as the original routine**.
-Changes were restricted to secondary issues:
+This port to modern C++ takes the same parameters as the original routine.
+The initial port preserved its numerical behaviour and introduced the
+following changes.
+
 * output variables moved to returned struct type
 * function is now passed as std::function which allows using objects as well as traditional functions
 * floating-point type and number of variables are now template arguments
@@ -24,6 +25,12 @@ Changes were restricted to secondary issues:
 
 All these changes are contained in
 [this changeset](https://github.com/develancer/nelder-mead/commit/b159c43f50f3a7dcaeb1d2c119b944d216dcf9ca).
+
+The convergence check now subtracts the first vertex's function value from each
+value before computing the sample variance. This shift preserves the variance
+in exact arithmetic and reduces rounding error when the values share a large
+offset. The check can therefore meet the `reqmin` threshold on a different
+iteration than in the original routine.
 
 🆕 Feel free to take a look at the branch
 [simplex-size](https://github.com/develancer/nelder-mead/tree/simplex-size)

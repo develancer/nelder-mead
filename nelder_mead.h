@@ -283,15 +283,16 @@ nelder_mead_result<real,n> nelder_mead(
             if (result.icount <= kcount) {
                 jcount = konvge;
 
+                // shift both passes by y[0] to keep a large common offset out of the mean
                 z = 0.0;
-                for (int i = 0; i < n + 1; i++) {
-                    z += y[i];
+                for (int i = 1; i < n + 1; i++) {
+                    z += y[i] - y[0];
                 }
                 x = z / (n + 1);
 
                 z = 0.0;
                 for (int i = 0; i < n + 1; i++) {
-                    real yx = y[i] - x;
+                    real yx = (y[i] - y[0]) - x;
                     z += yx * yx;
                 }
 
